@@ -2,7 +2,7 @@
 
 **Sinh viên:** Quyen
 **Ngày:** 2026-06-30
-**Eval:** RAGAS 4 metrics · 50 câu · LLM = deepseek-chat · embeddings = paraphrase-multilingual-MiniLM-L12-v2 (local)
+**Eval:** RAGAS 4 metrics · 50 câu · LLM = deepseek-v4-flash · embeddings = paraphrase-multilingual-MiniLM-L12-v2 (local)
 
 > Lưu ý kỹ thuật: `answer_relevancy.strictness` đặt = 1 vì DeepSeek chỉ hỗ trợ
 > `n = 1` (mặc định RAGAS n = 3 → lỗi 400). Embeddings chạy local để tránh quota

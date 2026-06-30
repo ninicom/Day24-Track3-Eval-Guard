@@ -11,7 +11,7 @@ HF_TOKEN = os.getenv("HF_TOKEN", "")  # Optional: for HuggingFace models
 
 # --- LLM provider: DeepSeek (OpenAI-compatible) ---
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "")
-LLM_MODEL = os.getenv("LLM_MODEL", "deepseek-chat")
+LLM_MODEL = os.getenv("LLM_MODEL", "deepseek-v4-flash")
 DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1"
 
 # Bridge DeepSeek onto the OpenAI env vars so bare OpenAI() (Phase B judge) and

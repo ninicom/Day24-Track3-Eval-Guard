@@ -21,7 +21,7 @@ User Input
     │ action:   return 503 + reason
     ▼
 [RAG Pipeline (Day 18)]
-    │ M1 Chunk → M2 Hybrid Search → M3 Rerank → deepseek-chat
+    │ M1 Chunk → M2 Hybrid Search → M3 Rerank → deepseek-v4-flash
     ▼
 [Output Rail]   ← Presidio PII scan + LLM check nội dung nhạy cảm
     │ flag if:  PII / mật khẩu / lương cá nhân trong response
