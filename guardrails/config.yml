@@ -1,7 +1,9 @@
 models:
   - type: main
     engine: openai
-    model: gpt-4o-mini
+    model: deepseek-chat
+    parameters:
+      base_url: https://api.deepseek.com/v1
 
 instructions:
   - type: general

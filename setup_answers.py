@@ -11,6 +11,12 @@ Yêu cầu:
 """
 from __future__ import annotations
 
+# Import the heavy native libs (torch/sentence-transformers) BEFORE underthesea /
+# enrichment models — otherwise their native runtimes init in an order that
+# segfaults on Windows. Must stay first.
+import sentence_transformers  # noqa: F401
+import torch  # noqa: F401
+
 import json
 import os
 import sys
@@ -75,20 +81,20 @@ def build_pipeline():
 
 
 def run_query(q: str, search, reranker, top_k: int) -> tuple[str, list[str]]:
-    from config import OPENAI_API_KEY
+    from config import DEEPSEEK_API_KEY, LLM_MODEL
 
     results = search.search(q)
     docs    = [{"text": r.text, "score": r.score, "metadata": r.metadata} for r in results]
     reranked = reranker.rerank(q, docs, top_k=top_k)
     contexts = [r.text for r in reranked] if reranked else [r.text for r in results[:3]]
 
-    if OPENAI_API_KEY and contexts:
+    if DEEPSEEK_API_KEY and contexts:
         try:
             from openai import OpenAI
-            client = OpenAI()
+            client = OpenAI()  # → DeepSeek via OPENAI_BASE_URL bridged in config.py
             ctx = "\n\n".join(contexts)
             resp = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model=LLM_MODEL,
                 messages=[
                     {"role": "system", "content": "Trả lời CHỈ dựa trên context. Nếu không có → nói 'Không tìm thấy.'"},
                     {"role": "user",   "content": f"Context:\n{ctx}\n\nCâu hỏi: {q}"},
